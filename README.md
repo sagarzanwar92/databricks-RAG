@@ -21,23 +21,23 @@ DATABRICKS-RAG/
 └── run_all.bat       # One-click launch script
 
 
-🚀 Getting Started
+## 🚀 Getting Started
 
-1. Setup Environment
+** 1. Setup Environment**
 Ensure you have your virtual environment activated and API keys set:
 
 # Create .env file in root
 OPENAI_API_KEY=sk-your-key-here
 
 
-2. Initialize Database
+**2. Initialize Database**
 If you haven't created the mock data yet, run:
 
 Bash
 python datamaker.py
 
 
-3. Launch the System
+**3. Launch the System**
 Simply double-click run_all.bat or run:
 (Check that you have correct address updated for where files are kept)
 
@@ -55,10 +55,17 @@ Backend: FastAPI
 Frontend: Streamlit, Chainlit
 
 
-4. Your Frontend should something like this:
+**4. Your Frontend should something like this:**
 
 ## 🖥️ Frontend Comparison
 
 | Streamlit Dashboard | Chainlit Chatbot |
 | :---: | :---: |
 | <img src="./assets/streamlit_ui.png" width="400"> | <img src="./assets/chainlit_ui.png" width="400"> |
+
+
+## 🖥️ Frontend Comparison
+
+| Streamlit Dashboard | Chainlit Chatbot |
+| :---: | :---: |
+| ![Streamlit](./assets/streamlit_ui.png) | ![Chainlit](./assets/chainlit_ui.png) |
