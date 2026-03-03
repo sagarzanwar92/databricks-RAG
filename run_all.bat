@@ -7,11 +7,11 @@ start "Backend (FastAPI)" cmd /k "call C:\Users\DELL\python_envs\ai_master\Scrip
 
 :: 2. Start the Streamlit Frontend
 echo Starting Streamlit Dashboard on Port 8501...
-start "Frontend (Streamlit)" cmd /k "call C:\Users\DELL\python_envs\ai_master\Scripts\activate && python -m streamlit run app/ui/streamlit_app.py"
+start "Frontend (Streamlit)" cmd /k "call C:\Users\DELL\python_envs\ai_master\Scripts\activate && python -m streamlit run app/ui/app_streamlit.py"
 
 :: 3. Start the Chainlit Chatbot
 echo Starting Chainlit Chat on Port 8001...
-start "Frontend (Chainlit)" cmd /k "call C:\Users\DELL\python_envs\ai_master\Scripts\activate && chainlit run app/ui/chainlit_app.py --port 8001"
+start "Frontend (Chainlit)" cmd /k "call C:\Users\DELL\python_envs\ai_master\Scripts\activate && chainlit run app/ui/app_chainlit.py --port 8001"
 
 echo.
 echo All systems are launching! 
