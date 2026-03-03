@@ -1,0 +1,27 @@
+# Sesitive
+.env
+auth.json
+secrets.py
+
+# Large DATA files
+data/*.db
+data/*.duckdb
+data/*.wal
+data/*.tmp/
+*.csv
+*.xlsx
+
+# PYTHON: Ignore compiled files and environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.pytest_cache/
+
+# IDE: Ignore local editor settings
+.vscode/
+.idea/
+.DS_Store
+*.swp

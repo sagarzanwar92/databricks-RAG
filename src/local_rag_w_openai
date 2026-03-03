@@ -1,0 +1,58 @@
+import os
+import duckdb
+from openai import OpenAI
+from dotenv import load_dotenv
+
+# 1. Initialize Environment & Client
+load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "enterprise_local.db")
+
+def ask_ai(question):
+    # 2. The "Leader" Prompt: Grounds the AI in your specific schema
+    system_instr = """
+    You are a SQL expert for a Sales database. 
+    TABLE: 'sales' (id, product, revenue, region)
+    
+    VALID VALUES:
+    - Products: 'GenAI Agent', 'Data Connector', 'Cloud Storage'
+    - Regions: 'North', 'South', 'East', 'West'
+    
+    RULES:
+    1. For string filters, ALWAYS use LOWER() for robustness.
+    2. Return ONLY the SQL code. No markdown (no ```), no explanation.
+    3. End with a semicolon (;).
+    
+    EXAMPLE:
+    Q: "Total revenue for North?"
+    A: SELECT SUM(revenue) FROM sales WHERE LOWER(region) = 'north';
+    """
+
+    # 3. Call GPT-4o-mini
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": system_instr},
+            {"role": "user", "content": f"Write SQL for: {question}"}
+        ],
+        temperature=0 # Absolute consistency
+    )
+    
+    sql = response.choices[0].message.content.strip()
+    # Clean up any potential markdown if GPT gets fancy
+    sql = sql.replace("```sql", "").replace("```", "").strip()
+    
+    print(f"🤖 OpenAI Generated SQL: {sql}")
+    
+    # 4. Execute against DuckDB
+    with duckdb.connect(DB_PATH) as con:
+        result = con.execute(sql).fetchall()
+        return result
+
+if __name__ == "__main__":
+    query = "What is the total revenue for the GenAI Agent?"
+    try:
+        data = ask_ai(query)
+        print(f"📊 Database Result: {data}")
+    except Exception as e:
+        print(f"❌ Error: {e}")
