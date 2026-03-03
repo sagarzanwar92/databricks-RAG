@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+from app.core.rag_engine import ask_ai
 
 st.title("🤖 Enterprise Data Assistant")
 
