@@ -1,13 +1,14 @@
 import duckdb
 import os
 
-# Use absolute paths to prevent "losing" the file again
+
 current_dir = os.path.dirname(os.path.abspath(__file__))
-#DB_PATH = os.path.join(BASE_DIR, "enterprise_local.db")
-DB_PATH = os.path.join(current_dir, "..", "data", "enterprise_local.db")
+DB_PATH = os.path.join(current_dir, "data", "enterprise_local.db")
 
 def setup():
-    # Connect and create schema
+    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+    
+    # Connect and create schema    
     with duckdb.connect(DB_PATH) as con:
         con.execute("DROP TABLE IF EXISTS sales")
         con.execute("""

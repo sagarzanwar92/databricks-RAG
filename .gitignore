@@ -2,14 +2,20 @@
 .env
 auth.json
 secrets.py
+credentials.json
 
 # Large DATA files
 data/*.db
 data/*.duckdb
 data/*.wal
+data/*.shm
 data/*.tmp/
 *.csv
 *.xlsx
+
+*.db-journal
+*.db-shm
+*.db-wal
 
 # PYTHON: Ignore compiled files and environments
 __pycache__/
@@ -19,9 +25,14 @@ venv/
 .venv/
 env/
 .pytest_cache/
+.mypy_cache/
+
+.web/
+.states/
 
 # IDE: Ignore local editor settings
 .vscode/
 .idea/
 .DS_Store
 *.swp
+.history/
