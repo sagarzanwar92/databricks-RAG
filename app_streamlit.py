@@ -3,7 +3,6 @@ import requests
 
 st.title("🤖 Enterprise Data Assistant")
 
-# Use a text input for "Hard Questions"
 question = st.text_input("Ask about revenue, regions, or trends:")
 
 if question:

@@ -3,11 +3,8 @@ import duckdb
 from openai import OpenAI
 from dotenv import load_dotenv
 
+project_root = os.path.dirname(os.path.abspath(__file__))
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.dirname(current_dir)
-
-# Load .env from the root folder
 env_path = os.path.join(project_root, ".env")
 load_dotenv(env_path)
 
@@ -15,9 +12,9 @@ DB_PATH = os.path.join(project_root, "data", "enterprise_local.db")
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+
 def ask_ai(question):
-    # 2. The "Leader" Prompt (Unchanged, it's already solid)
-    system_instr = """
+    system_prompt = """
     You are a SQL expert for a Sales database. 
     TABLE: 'sales' (id, product, revenue, region)
     
@@ -39,7 +36,7 @@ def ask_ai(question):
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {"role": "system", "content": system_instr},
+            {"role": "system", "content": system_prompt},
             {"role": "user", "content": f"Write SQL for: {question}"}
         ],
         temperature=0 
@@ -65,3 +62,5 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"❌ Error: {e}")
 
+
+#print(f"Tokens Used: {response.usage.total_tokens}")
