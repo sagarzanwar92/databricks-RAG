@@ -20,21 +20,26 @@ DATABRICKS-RAG/
 ├── scripts/          # Utility scripts (datamaker.py)
 └── run_all.bat       # One-click launch script
 
+```
 
 ## 🚀 Getting Started
 
-** 1. Setup Environment**
+**1. Setup Environment**
 Ensure you have your virtual environment activated and API keys set:
 
-# Create .env file in root
-OPENAI_API_KEY=sk-your-key-here
+**Create .env file in root**
+```text 
+OPENAI_API_KEY=sk-your-key-here 
+```
 
 
 **2. Initialize Database**
 If you haven't created the mock data yet, run:
 
-Bash
-python datamaker.py
+Bash 
+```text
+python datamaker.py 
+```
 
 
 **3. Launch the System**
@@ -42,8 +47,9 @@ Simply double-click run_all.bat or run:
 (Check that you have correct address updated for where files are kept)
 
 Bash
+```text
 ./run_all.bat
-
+```
 
 🛠️ Tech Stack
 LLM: OpenAI GPT-4o-mini
