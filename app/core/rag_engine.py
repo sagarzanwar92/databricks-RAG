@@ -14,7 +14,8 @@ DB_PATH = os.path.join(project_root, "data", "enterprise_local.db")
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-@cached(ttl=600) # Cache the result for 600 seconds (10 mins)
+
+@cached(ttl=600) # Cache the result for 600 seconds (10 mins) - wrapper to respond with caching if same question asked within 10 mins.
 def ask_ai(question):
     system_prompt = """
     You are a SQL expert for a Sales database. 
